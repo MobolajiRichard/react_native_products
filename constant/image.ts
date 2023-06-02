@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const pro  = require('../assets/images/pro.png')
 const beneful  = require('../assets/images/beneful.png')
 const iams  = require('../assets/images/iams.png')

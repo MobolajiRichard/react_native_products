@@ -1,66 +1,65 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  FlatList,
-} from "react-native";
-import React, { useState, useCallback } from "react";
-import { COLOR, IMAGE } from "../constant";
-import { products } from "./products";
+import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
+import React, { useState, useCallback, useMemo } from "react";
+import { COLOR } from "../constant";
+import { products } from "../utils";
 import ProductCard from "./ProductCard";
 import { Entypo } from "@expo/vector-icons";
-import { showAlert } from "./Alert";
+import { showAlert } from "../utils";
+import { ProductProp } from "../types";
 
-export default function Products() {
+const Products = () => {
   //states
   const [currentPage, setCurrentPage] = useState(1);
-  const [data, setData] = useState(products.slice(0, 6));
-  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [data, setData] = useState<ProductProp[]>(() => products.slice(0, 6)); //set data initially to the first six products
+  const [selectedProducts, setSelectedProducts] = useState<ProductProp[]>([]);
 
-  const maxPage = Math.ceil(products?.length / 6); // get the total number of pages based on data
+  //get total number of possible page based on products data
+  //taking into consideration each page must have at most 6 products
+  const maxPage = useMemo(() => Math.ceil(products?.length / 6), [products]);
 
-  const handleData = useCallback((currentPage) => {
-    setData(products.slice(currentPage * 6 - 6, currentPage * 6));
-  }, []);
+  //update the displayed data based on the current page
+  const handleData = useCallback(
+    (currentPage: number) => {
+      const startIndex = (currentPage - 1) * 6;
+      const endIndex = startIndex + 6;
+      setData(products.slice(startIndex, endIndex));
+    },
+    [products]
+  );
 
-  const handleNextPage = useCallback(() => {
-    if (currentPage < maxPage) {
-      setCurrentPage((prev) => {
-        const newPage = prev + 1;
+  //on page change, set current page to the current page and call handleData with the page,
+  //only if the page is greater than zero an less tan the max possible page
+  const handlePageChange = useCallback(
+    (newPage: number) => {
+      if (newPage > 0 && newPage <= maxPage) {
+        setCurrentPage(newPage);
         handleData(newPage);
-        return newPage;
-      });
-    }
-  }, [currentPage, handleData]);
+      }
+    },
+    [handleData, maxPage]
+  );
 
-  const handlePrevPage = useCallback(() => {
-    if (currentPage > 1) {
-      setCurrentPage((prev) => {
-        const newPage = prev - 1;
-        handleData(newPage);
-        return newPage;
-      });
-    }
-  }, [currentPage, handleData]);
+  //on next icon click, increase current page
+  const handleNextPage = useCallback(() => { handlePageChange(currentPage + 1); }, [currentPage, handlePageChange]);
 
-  console.log(selectedProducts);
+  //on prev icon click, decrease current page
+  const handlePrevPage = useCallback(() => { handlePageChange(currentPage - 1);}, [currentPage, handlePageChange]);
 
   return (
     <View style={styles.container}>
+      {/* products card display */}
       <FlatList
         data={data}
         numColumns={2}
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingHorizontal: 8,
-        }}
-        renderItem={({ item }) => <ProductCard product={item} setSelectedProducts={setSelectedProducts}/>}
+        contentContainerStyle={{ flexGrow: 1, paddingHorizontal: 8,}}
+        renderItem={({ item }: { item: ProductProp }) => (<ProductCard product={item} setSelectedProducts={setSelectedProducts} />)}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(product) => product.id}
+        keyExtractor={(product: ProductProp) => product.id.toString()}
       />
+
+      {/* pagination */}
       <View style={styles.pagination}>
+        {/* Previous icon */}
         <Pressable onPress={handlePrevPage}>
           <Entypo
             name="chevron-thin-left"
@@ -69,12 +68,15 @@ export default function Products() {
             style={{ marginRight: 10 }}
           />
         </Pressable>
-
         {/* display correct dots based on the number of page available */}
         {new Array(maxPage).fill(0).map((_, i) => (
-          <View key={i} style={[styles.circle, currentPage === i + 1 && styles.current]}></View>
+          <Pressable
+            onPress={() => handlePageChange(i + 1)}
+            key={i}
+            style={[styles.circle, currentPage === i + 1 && styles.current]}
+          ></Pressable>
         ))}
-
+        {/* Next icon */}
         <Pressable onPress={handleNextPage}>
           <Entypo
             name="chevron-thin-right"
@@ -83,9 +85,10 @@ export default function Products() {
             style={{ marginLeft: 10 }}
           />
         </Pressable>
-
       </View>
-      <Pressable style={styles.button} onPress={showAlert}>
+
+       {/* select button */}
+      <Pressable style={styles.button} onPress={() => showAlert(selectedProducts?.length > 0)}>
         <Text style={styles.buttonText}> Select products</Text>
       </Pressable>
     </View>
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLOR.neutral,
     marginHorizontal: 5,
   },
-  current:{
+  current: {
     backgroundColor: COLOR.secondary,
   },
   pagination: {
@@ -128,3 +131,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
 });
+
+export default Products

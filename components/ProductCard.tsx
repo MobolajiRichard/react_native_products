@@ -1,23 +1,26 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { COLOR} from "../constant";
 import { AntDesign } from "@expo/vector-icons";
+import {ProductCardProp} from "../types";
 
-export default function ProductCard({ product, setSelectedProducts }) {
+const ProductCard:React.FC<ProductCardProp> = ({ product, setSelectedProducts }) => {
+ 
   const [checked, setChecked] = useState(false);
 
-  const onSelect = () => {
+  //set checked products to local state
+  const onSelect = useCallback(() => {
     setChecked((prev) => !prev);
-    if (!checked) {
-      //add products to selected after checking
-      setSelectedProducts((selected) => [...selected, product]);
-    } else {
-      //remove products from selected after unchecking
-      setSelectedProducts((selected) => {
+    setSelectedProducts((selected) => {
+      if (!checked) {
+        // Add product to selected after checking
+        return [...selected, product];
+      } else {
+        // Remove product from selected after unchecking
         return selected.filter((s) => s.id !== product.id);
-      });
-    }
-  };
+      }
+    });
+  }, [checked, product, setSelectedProducts]);
 
   return (
     <View style={styles.container}>
@@ -115,3 +118,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
+
+
+export default ProductCard
