@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { ActivityIndicator, StyleSheet,SafeAreaView } from 'react-native';
 
 
 
@@ -15,6 +15,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor='white' style='dark'/>
       <Products/>
     </SafeAreaView>
   );
