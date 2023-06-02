@@ -1,5 +1,3 @@
-
-
 import { StatusBar as Bar} from "expo-status-bar";
 import { ActivityIndicator, StyleSheet, SafeAreaView, StatusBar , Platform, Dimensions} from "react-native";
 import Products from "./components/Product";

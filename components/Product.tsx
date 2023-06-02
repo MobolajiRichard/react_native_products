@@ -99,7 +99,7 @@ const Products = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS === 'android' ? 16 : 0,
+    marginTop: Platform.OS === 'android' ? 28 : 20,
   },
   buttonText: {
     color: COLOR.black,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 100,
-    backgroundColor: COLOR.neutral,
+    backgroundColor: COLOR.secondaryGrey,
     marginHorizontal: 5,
   },
   current: {

@@ -109,8 +109,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   divider: {
-    borderRightWidth: 2,
-    borderRightColor: COLOR.neutral,
+    borderRightWidth: 1,
+    borderRightColor: '#979593',
     height: 14,
   },
   price: {
