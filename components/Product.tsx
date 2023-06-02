@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Pressable, FlatList } from "react-native";
+
+import { StyleSheet, Text, View, Pressable, FlatList, Platform } from "react-native";
 import React, { useState, useCallback, useMemo } from "react";
 import { COLOR } from "../constant";
 import { products } from "../utils";
@@ -98,6 +99,7 @@ const Products = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: Platform.OS === 'android' ? 16 : 0,
   },
   buttonText: {
     color: COLOR.black,

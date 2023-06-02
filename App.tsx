@@ -1,5 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-import { ActivityIndicator, StyleSheet, SafeAreaView } from "react-native";
+
+
+import { StatusBar as Bar} from "expo-status-bar";
+import { ActivityIndicator, StyleSheet, SafeAreaView, StatusBar , Platform, Dimensions} from "react-native";
 import Products from "./components/Product";
 import { useFonts } from "expo-font";
 import { FONTS } from "./constant";
@@ -15,9 +17,11 @@ export default function App() {
   //return a loading indicator if font's is still loading
   if (!fontsLoaded) return <ActivityIndicator />;
 
+  console.log(Platform.OS)
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="white" style="dark" />
+      <Bar backgroundColor="white" style="dark" />
       <Products />
     </SafeAreaView>
   );
@@ -26,6 +30,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-  },
+    backgroundColor: "white",
+    paddingTop: Platform.OS === 'android' ? StatusBar?.currentHeight : 0,
+    height:Dimensions.get('window').height
+  }
 });

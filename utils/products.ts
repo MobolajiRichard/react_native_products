@@ -29,7 +29,7 @@ export const products = [
         id:4,
         image:IMAGE.pedigree,
         title:'Pedigree',
-        desc:'steak & Vegetable',
+        desc:'Steak & Vegetable',
         weight:44,
         price:30
     },
@@ -53,7 +53,7 @@ export const products = [
         id:7,
         image:IMAGE.pedigree,
         title:'Pedigree 2',
-        desc:'steak & Vegetable',
+        desc:'Steak & Vegetable',
         weight:44,
         price:30
     },
@@ -109,7 +109,7 @@ export const products = [
         id:14,
         image:IMAGE.pedigree,
         title:'Pedigree 3',
-        desc:'steak & Vegetable',
+        desc:'Steak & Vegetable',
         weight:44,
         price:30
     },
@@ -157,7 +157,7 @@ export const products = [
         id:20,
         image:IMAGE.pedigree,
         title:'Pedigree 4',
-        desc:'steak & Vegetable',
+        desc:'Steak & Vegetable',
         weight:44,
         price:30
     },
@@ -213,7 +213,7 @@ export const products = [
         id:27,
         image:IMAGE.pedigree,
         title:'Pedigree 5',
-        desc:'steak & Vegetable',
+        desc:'Steak & Vegetable',
         weight:44,
         price:30
     },
@@ -240,53 +240,5 @@ export const products = [
         desc:'Chicken & Whole Grains',
         weight:30,
         price:47
-    },
-    {
-        id:31,
-        image:IMAGE.beneful,
-        title:'Purina Beneful 6',
-        desc:'Farm-Raised Rice',
-        weight:28,
-        price:31
-    },
-    {
-        id:32,
-        image:IMAGE.iams,
-        title:'Iams 6',
-        desc:'Chicken & Whole Grains',
-        weight:30,
-        price:47
-    },
-    {
-        id:33,
-        image:IMAGE.pedigree,
-        title:'Pedigree 6',
-        desc:'steak & Vegetable',
-        weight:44,
-        price:30
-    },
-    {
-        id:34,
-        image:IMAGE.one,
-        title:'Purina ONE 6',
-        desc:'Chicken & Rice',
-        weight:31,
-        price:49
-    },
-    {
-        id:35,
-        image:IMAGE.bluebuffalo,
-        title:'Blue Buffalo 6',
-        desc:'Chicken & Rice',
-        weight:30,
-        price:65
-    },
-    {
-        id:36,
-        image:IMAGE.pro,
-        title:'Purina Pro 6',
-        desc:'Chicken & Rice',
-        weight:18,
-        price:42
-    },
+    }
 ]
