@@ -17,7 +17,7 @@ export default function ProductCard({product, setSelectedProducts}) {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
             <Image  source={product.image}/>
-            <Pressable onPress={() => setChecked(prev => !prev)} style={[styles.checkbox, checked && styles.check]}>
+            <Pressable onPress={onSelect} style={[styles.checkbox, checked && styles.check]}>
             {checked && <AntDesign name="check" size={18} color={COLOR.black} />}
             </Pressable>
       </View>
