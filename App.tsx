@@ -1,12 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+
+
+
+import Products from './components/Product';
+import { useFonts } from "expo-font";
+import {FONTS} from './constant'
+
 
 export default function App() {
+  const [fontsLoaded] = useFonts({outfit_light: FONTS.outfit_light, outfit_medium: FONTS.outfit_medium, outfit_regular: FONTS.outfit_regular});
+
+  if(!fontsLoaded) return <ActivityIndicator/>
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Products/>
+    </SafeAreaView>
   );
 }
 
@@ -14,7 +24,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
