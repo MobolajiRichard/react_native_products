@@ -12,6 +12,7 @@ import ArrowLeft from "../assets/icons/ArrowLeft";
 import { products } from "./products";
 import ProductCard from "./ProductCard";
 import { Entypo } from "@expo/vector-icons";
+import { showAlert } from "./Alert";
 
 export default function Products() {
   //states
@@ -85,7 +86,7 @@ export default function Products() {
         </Pressable>
 
       </View>
-      <Pressable style={styles.button} onPress={() => alert("select product")}>
+      <Pressable style={styles.button} onPress={showAlert}>
         <Text style={styles.buttonText}> Select products</Text>
       </Pressable>
     </View>
