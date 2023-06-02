@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import React, { useState } from "react";
-import { COLOR, IMAGE } from "../constant";
-import ArrowLeft from "../assets/icons/ArrowLeft";
+import { COLOR} from "../constant";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function ProductCard({ product, setSelectedProducts }) {
@@ -15,8 +14,7 @@ export default function ProductCard({ product, setSelectedProducts }) {
     } else {
       //remove products from selected after unchecking
       setSelectedProducts((selected) => {
-        const filteredProducts = selected.filter((s) => s.id !== product.id);
-        return filteredProducts;
+        return selected.filter((s) => s.id !== product.id);
       });
     }
   };

@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useState, useCallback } from "react";
 import { COLOR, IMAGE } from "../constant";
-import ArrowLeft from "../assets/icons/ArrowLeft";
 import { products } from "./products";
 import ProductCard from "./ProductCard";
 import { Entypo } from "@expo/vector-icons";
